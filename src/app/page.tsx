@@ -1,5 +1,6 @@
 import React from "react";
 import detailsSample from "/data/details_sample.json";
+import Header from "./components/header.tsx";
 
 export default function Home() {
     const data = detailsSample;
@@ -7,9 +8,7 @@ export default function Home() {
     return (
         <main className="flex flex-col min-h-screen bg-gray-900 text-white">
             {/* Header */}
-            <header className="bg-gray-800 p-6 shadow-md">
-                <h1 className="text-3xl font-bold text-center">Fein</h1>
-            </header>
+            <Header />
 
             {/* Game Library */}
             <section className="p-8">
