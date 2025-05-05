@@ -1,8 +1,12 @@
-import React from "react";
-import detailsSample from "/data/details_sample.json";
+import useSWR from 'swr';
+
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Home() {
-    const data = detailsSample;
+    const { data, error } = useSWR('/api/games', fetcher);
+    if (error) return <div>Failed to load</div>;
+    if (!data) return <div>Loading...</div>;
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">

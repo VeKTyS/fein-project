@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Jeu {
+  ID_Jeu           String    @id
+  Nom_Jeu          String
+  Description      String
+  Annee_sortie     DateTime
+  Joueur_minimum   Int
+  Joueur_maximum   Int
+  Min_temps_de_jeu DateTime
+  Max_temps_de_jeu DateTime
+  Jeu_categorie    String
+  Jeu_editeur      String
+  Jeu_designer     String
+  Jeu_artiste      String
+
+  avis             Avis[]
+  achats           Achat[]
+  biblios         Biblio[]
+}
+
+model Utilisateur {
+  ID_Utilisateur    String    @id
+  Pseudo           String
+  Nom             String
+  Prenom          String
+  Mot_de_passe    String
+  Date_de_naissance DateTime
+  Date_Inscription DateTime
+
+  avis             Avis[]
+  achats           Achat[]
+  biblios         Biblio[]
+}
+
+model Categorie {
+  ID_Categorie   String    @id
+  Nom_categorie String
+}
+
+model Avis {
+  IDAvis         String    @id
+  Note          Float
+  Nom           String
+  Date          String
+  URL           String
+  Users_Rated   String
+  Moyenne       Float
+
+  ID_Utilisateur String
+  ID_Jeu        String
+
+  utilisateur    Utilisateur @relation(fields: [ID_Utilisateur], references: [ID_Utilisateur])
+  jeu            Jeu         @relation(fields: [ID_Jeu], references: [ID_Jeu])
+}
+
+model Achat {
+  id           Int      @id @default(autoincrement())
+  ID_Jeu      String
+  ID_Utilisateur String
+  date_achat  DateTime
+  qtt         Int
+  prix_unit   String
+
+  utilisateur Utilisateur @relation(fields: [ID_Utilisateur], references: [ID_Utilisateur])
+  jeu         Jeu         @relation(fields: [ID_Jeu], references: [ID_Jeu])
+}
+
+model Biblio {
+  id            Int      @id @default(autoincrement())
+  ID_Jeu       String
+  IDUtilisateur String
+  date         DateTime
+
+  utilisateur  Utilisateur @relation(fields: [IDUtilisateur], references: [ID_Utilisateur])
+  jeu          Jeu         @relation(fields: [ID_Jeu], references: [ID_Jeu])
+}

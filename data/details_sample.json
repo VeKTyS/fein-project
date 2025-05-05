@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "name": "Game One",
+        "description": "This is the first game.",
+        "imageUrl": "/images/game1.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Game Two",
+        "description": "This is the second game.",
+        "imageUrl": "/images/game2.jpg"
+    }
+]
