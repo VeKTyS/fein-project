@@ -1,11 +1,17 @@
-import React from "react";
-import detailsSample from "/data/details_sample.json";
+"use client"
+import React, {useEffect, useState} from "react";
 import Header from "./components/header.tsx";
 import Footer from "./components/footer.tsx";
 import './globals.css';
 
 export default function Home() {
-    const data = detailsSample;
+    const [data, setData] = useState<any[]>([]);
+
+    useEffect(() => {
+        fetch("http://localhost:5000/api/details_sample")
+            .then((res) => res.json())
+            .then((json) => setData(json));
+    }, []);
 
     return (
         <main className="flex flex-col min-h-screen bg-gray-900 text-white">
