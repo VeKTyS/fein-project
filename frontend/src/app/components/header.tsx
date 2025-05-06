@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const router = useRouter();
 
     return (
         <header className="bg-gray-900 text-white shadow-md">
@@ -53,35 +55,28 @@ export default function Header() {
                     </button>
                 </div>
 
-                {/* Right Section: User Profile */}
+                {/* Right Section: Se connecter if clicked go to page login */}
                 <div className="relative">
-                    <div
-                        className="flex items-center space-x-2 cursor-pointer"
-                        onMouseEnter={() => setIsDropdownOpen(true)}
-                        onMouseLeave={() => setIsDropdownOpen(false)}
+                    <button
+                        className="flex items-center space-x-2 text-sm text-gray-300 hover:text-white"
+                        onClick={() => router.push("/login")}
                     >
-                        <img
-                            src="/images/profile.jpg"
-                            alt="Profile"
-                            className="h-8 w-8 rounded-full"
-                        />
-                        <span className="text-sm">TEST</span>
+                        <span>Se connecter</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
                             strokeWidth="2"
                             stroke="currentColor"
-                            className="h-5 w-5 text-gray-400"
+                            className="h-5 w-5"
                         >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                                d="M6 9l6 6 6-6"
+                                d="M7 10l5 5 5-5H7z"
                             />
                         </svg>
-                    </div>
-
+                    </button>
                     {/* Dropdown Menu */}
                     {isDropdownOpen && (
                         <div
