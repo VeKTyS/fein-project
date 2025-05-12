@@ -1,5 +1,5 @@
 "use client"
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/header.tsx";
 import Footer from "./components/footer.tsx";
 import './globals.css';
@@ -42,8 +42,8 @@ export default function Home() {
                 </div>
             </section>
 
-           {/* Footer */}
-           <Footer />   
+            {/* Footer */}
+            <Footer />
         </main>
     );
 }
