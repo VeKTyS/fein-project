@@ -1,24 +1,26 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { Link, useNavigate } from "react-router-dom"; // Import Link and useNavigate
 
 export default function Header() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const navigate = useNavigate(); // Use useNavigate instead of useRouter
+    const navigate = useNavigate(); // Use useNavigate for navigation
 
     return (
         <header className="bg-gray-900 text-white shadow-md">
             <div className="flex items-center justify-between px-6 py-4">
                 {/* Left Section: Logo and Navigation */}
                 <div className="flex items-center space-x-6">
-                    <img
-                        src="/images/logofein.png"
-                        alt="Logo"
-                        className="h-8 w-8"
-                    />
+                    <Link to="/">
+                        <img
+                            src="/images/logofein.png"
+                            alt="Logo"
+                            className="h-8 w-8"
+                        />
+                    </Link>
                     <nav className="flex space-x-4">
-                        <a href="#" className="hover:text-blue-400">
+                        <Link to="/" className="hover:text-blue-400">
                             MAGASIN
-                        </a>
+                        </Link>
                         <a href="#" className="hover:text-blue-400">
                             LIBRAIRIE
                         </a>
@@ -96,12 +98,12 @@ export default function Header() {
             {/* Bottom Section: Secondary Navigation */}
             <div className="bg-gray-800 px-6 py-2">
                 <nav className="flex space-x-6">
-                    <a href="#" className="text-sm text-gray-400 hover:text-white">
+                    <Link to="/" className="text-sm text-gray-400 hover:text-white">
                         Accueil
-                    </a>
-                    <a href="#" className="text-sm text-gray-400 hover:text-white">
-                        Catégories
-                    </a>
+                    </Link>
+                    <Link to="/category" className="text-sm text-gray-400 hover:text-white">    
+                        Catégorie
+                    </Link>
                     <a href="#" className="text-sm text-gray-400 hover:text-white">
                         Découvrir
                     </a>
