@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import BrowserRouter, Routes, and Route
 import './index.css'
 import HomePage from './pages/HomePage.jsx'
-import GameDetails from './pages/GameDetails'; 
+import GameDetails from './pages/GameDetails.jsx'; 
 import Category from './pages/Category.jsx';
 import CategoryDetails from './pages/CategoryDetails.jsx';
 
