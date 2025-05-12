@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "7 Wonders",
+        "description": "You are the leader of one of the 7 great cities of the Ancient World. Gather resources, develop commercial routes, and affirm your military supremacy. Build your city and erect an architectural wonder which will transcend future times",
+        "imageUrl": "/images/7wonders.jpg",
+        "yearpublished": 2010,
+        "minplayers": 2,
+        "maxplayers": 7,
+        "minplaytime": 30,
+        "maxplaytime": 40,
+        "boradgamecategory": "Strategy",
+        "boardgamedesigner": "Antoine Bauza",
+        "boardgamepublisher": "Repos Production",
+        "bordgameartist": "Gwen de Bonneval"
+    },
+    {
+        "id": 2,
+        "name": "7 Wonders",
+        "description": "You are the leader of one of the 7 great cities of the Ancient World. Gather resources, develop commercial routes, and affirm your military supremacy. Build your city and erect an architectural wonder which will transcend future times",
+        "imageUrl": "/images/7wonders.jpg",
+        "yearpublished": 2010,
+        "minplayers": 2,
+        "maxplayers": 7,
+        "minplaytime": 30,
+        "maxplaytime": 40,
+        "boardgamecategory": "Strategy",
+        "boardgamedesigner": "Antoine Bauza",
+        "boardgamepublisher": "Repos Production",
+        "bordgameartist": "Gwen de Bonneval"
+    }
+]
