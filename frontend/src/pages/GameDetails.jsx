@@ -1,12 +1,34 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import detailsSample from "../data/details_sample.json";
+import { useGamesData } from '../data/gameData';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+// Helper to decode HTML entities
+function decodeHtml(html) {
+    const txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
+}
+
 const GameDetails = () => {
-    const { id } = useParams(); // Get the game ID from the route parameter
-    const game = detailsSample.find((game) => game.id === parseInt(id)); // Find the game by ID
+    const { id } = useParams();
+    const { data, ratings, loading } = useGamesData();
+
+    if (loading) {
+        return (
+            <main className="flex flex-col min-h-screen bg-gray-900 text-white">
+                <Header />
+                <section className="flex-grow flex items-center justify-center">
+                    <h2 className="text-2xl font-semibold">Chargement...</h2>
+                </section>
+                <Footer />
+            </main>
+        );
+    }
+
+    // Find the game based on the id parameter
+    const game = data.find(g => g.id === Number(id));
 
     if (!game) {
         return (
@@ -20,39 +42,49 @@ const GameDetails = () => {
         );
     }
 
+    const ratingObj = ratings.find(r => r.gameId === game.id) || {};
+    const removeBrackets = (str) => {
+        if (typeof str === 'string') {
+            return str.replace(/[\[\]']/g, '');
+        }
+        return '';
+    };
+
     return (
         <main className="flex flex-col min-h-screen bg-gray-900 text-white">
-            {/* Header */}
             <Header />
 
             {/* Game Details */}
             <section className="px-4 py-8 md:px-8">
                 <div className="max-w-4xl mx-auto bg-gray-800 rounded-lg shadow-md overflow-hidden">
+                    {/* Use the rating thumbnail if available, otherwise use the game image */}
                     <img
-                        src={game.imageUrl}
+                        src={ratingObj.thumbnail || game.imageUrl}
                         alt={game.name}
                         className="w-full h-64 object-cover"
                         loading="lazy"
                     />
                     <div className="p-6">
                         <h1 className="text-3xl font-bold mb-4">{game.name}</h1>
-                        <p className="text-gray-400 text-lg mb-6">{game.description}</p>
+                        <p className="text-sm text-gray-400 mt-2">
+                                            {decodeHtml(game.description)}
+                                        </p>
                         <div className="text-sm text-gray-300">
                             <p><strong>Genre:</strong> {game.boardgamecategory}</p>
                             <p><strong>Players:</strong> {game.minplayers} - {game.maxplayers}</p>
                             <p><strong>Play Time:</strong> {game.minplaytime} - {game.maxplaytime} minutes</p>
-                            <p><strong>Designer:</strong> {game.boardgamedesigner}</p>
-                            <p><strong>Artist:</strong> {game.boardgameartist}</p>
-                            <p><strong>Publisher:</strong> {game.boardgamepublisher}</p>
-                            <p><strong>Release Date:</strong> {game.yearpublished}</p>
-                            <p><strong>Rating:</strong> {game.averageuserrating} / 10</p>
-                            <p><strong>Rank:</strong> {game.boardgamerank}</p>
+                            <p><strong>Designer:</strong> {removeBrackets(game.boardgamedesigner)}</p>
+                            <p><strong>Artist:</strong> {removeBrackets(game.boardgameartist)}</p>
+                            <p><strong>Publisher:</strong> {removeBrackets(game.boardgamepublisher)}</p>
+                            <p><strong>Release Year:</strong> {game.yearpublished}</p>
+                            <p>
+                                <strong>Rating:</strong> {ratingObj.value ? ratingObj.value.toFixed(1) : 'N/A'} / 10
+                            </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Footer */}
             <Footer />
         </main>
     );
