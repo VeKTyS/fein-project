@@ -6,6 +6,9 @@ import HomePage from './pages/HomePage.jsx'
 import GameDetails from './pages/GameDetails.jsx'; 
 import Category from './pages/Category.jsx';
 import CategoryDetails from './pages/CategoryDetails.jsx';
+import Login from './pages/Login.jsx';
+import Register from './pages/Register.jsx';
+import Settings from './pages/Settings.jsx';
 
 
 
@@ -16,7 +19,11 @@ const Main = () => {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/game/:id" element={<GameDetails />} />
                 <Route path="/category" element={<Category />} />
-                <Route path="/category/:category" element={<CategoryDetails />} /> {/* Dynamic route */}
+                <Route path="/category/:category" element={<CategoryDetails />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="*" element={<h2 className="text-2xl font-semibold">Page non trouvée</h2>} />
             </Routes>
         </Router>
     );

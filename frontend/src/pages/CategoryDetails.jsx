@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useGamesData } from '../data/gameData';
 
-// Decode les entités HTML
 function decodeHtml(html) {
     const txt = document.createElement('textarea');
     txt.innerHTML = html;

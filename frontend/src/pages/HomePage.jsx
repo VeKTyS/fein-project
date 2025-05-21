@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useGamesData } from '../data/gameData';
 
-// Helper to decode HTML entities
 function decodeHtml(html) {
     const txt = document.createElement('textarea');
     txt.innerHTML = html;
     return txt.value;
 }
+
 
 const HomePage = () => {
     const { data, ratings, loading } = useGamesData();
@@ -35,24 +35,27 @@ const HomePage = () => {
                     {data.map((game) => {
                         const ratingObj = ratings.find(r => r.gameId === game.id) || {};
                         return (
-                            <article key={game.id} className="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:scale-105 transition-transform duration-200">
-                                <Link to={`/game/${game.id}`}>
-                                    {ratingObj.thumbnail && (
-                                        <img
-                                            src={ratingObj.thumbnail}
-                                            alt={game.name}
-                                            className="w-full h-48 object-cover"
-                                            loading="lazy"
-                                        />
-                                    )}
-                                    <div className="p-4">
-                                        <h3 className="text-lg font-bold">{game.primary_key}</h3>
+                            <article
+                                key={game.id}
+                                className="bg-gray-800 rounded-lg shadow-md overflow-hidden hover:scale-105 transition-transform duration-200 flex items-center"
+                            >
+                                <Link to={`/game/${game.id}`} className="flex items-center w-full">
+                                    {/* Thumbnail Section */}
+                                    <img
+                                        src={ratingObj.thumbnail || game.imageUrl}
+                                        alt={game.name}
+                                        className="w-16 h-16 object-cover flex-shrink-0 m-4 rounded"
+                                        loading="lazy"
+                                    />
+                                    {/* Info Section */}
+                                    <div className="p-4 flex-1">
+                                        <h3 className="text-lg font-bold text-white">{game.primary_key}</h3>
                                         <p className="text-sm text-gray-400 mt-2">
                                             {game.description && game.description.length > 100
                                                 ? decodeHtml(game.description.slice(0, 100)) + '...'
                                                 : decodeHtml(game.description)}
                                         </p>
-                                        <p className="text-xs text-gray-500 mt-2">
+                                        <p className="text-sm text-gray-500 mt-2">
                                             <strong>Rating:</strong> {ratingObj.value?.toFixed(1) ?? 'N/A'}
                                         </p>
                                     </div>

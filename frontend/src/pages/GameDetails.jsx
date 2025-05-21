@@ -54,23 +54,15 @@ const GameDetails = () => {
         <main className="flex flex-col min-h-screen bg-gray-900 text-white">
             <Header />
 
-            {/* Game Details */}
             <section className="px-4 py-8 md:px-8">
                 <div className="max-w-4xl mx-auto bg-gray-800 rounded-lg shadow-md overflow-hidden">
-                    {/* Use the rating thumbnail if available, otherwise use the game image */}
-                    <img
-                        src={ratingObj.thumbnail || game.imageUrl}
-                        alt={game.name}
-                        className="w-full h-64 object-cover"
-                        loading="lazy"
-                    />
                     <div className="p-6">
-                        <h1 className="text-3xl font-bold mb-4">{game.name}</h1>
+                        <h1 className="text-5xl font-bold mb-6 text-center text-white">{game.primary_key}</h1>
                         <p className="text-sm text-gray-400 mt-2">
-                                            {decodeHtml(game.description)}
-                                        </p>
-                        <div className="text-sm text-gray-300">
-                            <p><strong>Genre:</strong> {game.boardgamecategory}</p>
+                            {decodeHtml(game.description)}
+                        </p>
+                        <div className="text-sm text-gray-300 mt-4">
+                            <p><strong>Genre:</strong> {removeBrackets(game.boardgamecategory)}</p>
                             <p><strong>Players:</strong> {game.minplayers} - {game.maxplayers}</p>
                             <p><strong>Play Time:</strong> {game.minplaytime} - {game.maxplaytime} minutes</p>
                             <p><strong>Designer:</strong> {removeBrackets(game.boardgamedesigner)}</p>
@@ -84,7 +76,6 @@ const GameDetails = () => {
                     </div>
                 </div>
             </section>
-
             <Footer />
         </main>
     );
