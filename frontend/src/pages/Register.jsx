@@ -14,6 +14,7 @@ const Register = () => {
     });
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         const userId = localStorage.getItem('userId');
@@ -30,6 +31,8 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErrorMessage(''); // reset previous error
+
         try {
             const response = await fetch('http://localhost:5000/api/utilisateur', {
                 method: 'POST',
@@ -39,15 +42,17 @@ const Register = () => {
                 body: JSON.stringify(formData),
             });
 
+            const result = await response.json();
+
             if (response.ok) {
                 alert('Inscription réussie !');
                 navigate('/login');
             } else {
-                alert('Erreur lors de l\'inscription.');
+                setErrorMessage(result.error || 'Erreur lors de l\'inscription.');
             }
         } catch (error) {
             console.error('Erreur:', error);
-            alert('Une erreur est survenue.');
+            setErrorMessage('Une erreur est survenue.');
         }
     };
 
@@ -74,7 +79,7 @@ const Register = () => {
                                 onChange={handleChange}
                                 className="w-full px-4 py-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Entrez votre pseudo"
-                                required
+                                
                             />
                         </div>
                         <div className="mb-4">
@@ -89,7 +94,7 @@ const Register = () => {
                                 onChange={handleChange}
                                 className="w-full px-4 py-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Entrez votre nom"
-                                required
+                                
                             />
                         </div>
                         <div className="mb-4">
@@ -104,7 +109,7 @@ const Register = () => {
                                 onChange={handleChange}
                                 className="w-full px-4 py-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Entrez votre prénom"
-                                required
+                                
                             />
                         </div>
                         <div className="mb-4">
@@ -119,7 +124,7 @@ const Register = () => {
                                 onChange={handleChange}
                                 className="w-full px-4 py-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Entrez votre mot de passe"
-                                required
+                                
                             />
                         </div>
                         <div className="mb-6">
@@ -133,9 +138,16 @@ const Register = () => {
                                 value={formData.date_de_naissance}
                                 onChange={handleChange}
                                 className="w-full px-4 py-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                required
+                                
                             />
                         </div>
+
+                        {errorMessage && (
+                            <p className="text-red-500 text-sm mb-4 text-center">
+                                {errorMessage}
+                            </p>
+                        )}
+
                         <button
                             type="submit"
                             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"

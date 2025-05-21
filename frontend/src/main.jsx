@@ -9,7 +9,9 @@ import CategoryDetails from './pages/CategoryDetails.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Settings from './pages/Settings.jsx';
-
+import ProfilPage from './pages/ProfilPage.jsx';
+import LibrairiePage from './pages/LibrairiePage.jsx';
+import Discover from './pages/Discover.jsx';
 
 
 const Main = () => {
@@ -23,6 +25,9 @@ const Main = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/profil/:id" element={<ProfilPage />} />
+                <Route path="/librairie/:id" element={<LibrairiePage />} />
+                <Route path="/discover" element={<Discover />} />
                 <Route path="*" element={<h2 className="text-2xl font-semibold">Page non trouvée</h2>} />
             </Routes>
         </Router>

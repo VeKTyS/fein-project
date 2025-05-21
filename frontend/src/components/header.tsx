@@ -5,15 +5,17 @@ export default function Header() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userName, setUserName] = useState("");
+    const [userId, setUserId] = useState(""); // Add userId state
     const navigate = useNavigate();
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const userId = localStorage.getItem('userId');
-        if (userId) {
+        const storedUserId = localStorage.getItem('userId');
+        if (storedUserId) {
             setIsLoggedIn(true);
+            setUserId(storedUserId); // Set userId from localStorage
 
-            fetch(`http://localhost:5000/api/user/${userId}`)
+            fetch(`http://localhost:5000/api/user/${storedUserId}`)
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error("Failed to fetch user data");
@@ -32,6 +34,7 @@ export default function Header() {
     const handleLogout = () => {
         localStorage.removeItem('userId');
         setIsLoggedIn(false);
+        setUserId(""); // Clear userId
         navigate("/login");
     };
 
@@ -64,12 +67,16 @@ export default function Header() {
                         <Link to="/" className="hover:text-blue-400">
                             MAGASIN
                         </Link>
-                        <a href="#" className="hover:text-blue-400">
-                            LIBRAIRIE
-                        </a>
-                        <a href="#" className="hover:text-blue-400">
-                            PROFIL
-                        </a>
+                        {isLoggedIn && (
+                            <>
+                                <Link to={`/librairie/${userId}`} className="hover:text-blue-400">
+                                    LIBRAIRIE
+                                </Link>
+                                {/* <Link to={`/profil/${userId}`} className="hover:text-blue-400">
+                                    PROFIL
+                                </Link> */}
+                            </>
+                        )}
                     </nav>
                 </div>
 
@@ -152,9 +159,9 @@ export default function Header() {
                     <Link to="/category" className="text-sm text-gray-400 hover:text-white">
                         Catégorie
                     </Link>
-                    <a href="#" className="text-sm text-gray-400 hover:text-white">
+                    <Link to="/discover" className="text-sm text-gray-400 hover:text-white">
                         Découvrir
-                    </a>
+                    </Link>
                 </nav>
             </div>
         </header>

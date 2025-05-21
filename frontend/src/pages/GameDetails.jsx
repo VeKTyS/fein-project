@@ -14,6 +14,7 @@ function decodeHtml(html) {
 const GameDetails = () => {
     const { id } = useParams();
     const { data, ratings, loading } = useGamesData();
+    const userId = localStorage.getItem("userId"); // Retrieve userId from localStorage
 
     if (loading) {
         return (
@@ -27,7 +28,6 @@ const GameDetails = () => {
         );
     }
 
-    // Find the game based on the id parameter
     const game = data.find(g => g.id === Number(id));
 
     if (!game) {
@@ -48,6 +48,29 @@ const GameDetails = () => {
             return str.replace(/[\[\]']/g, '');
         }
         return '';
+    };
+
+    const addToAchat = async () => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/achat/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ gameId: game.id }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Erreur lors de l'ajout du jeu.");
+            }
+
+            alert("Jeu ajouté à votre bibliothèque !");
+        } catch (error) {
+            console.error("Erreur lors de l'ajout :", error);
+            alert(error.message);
+        }
     };
 
     return (
@@ -73,6 +96,13 @@ const GameDetails = () => {
                                 <strong>Rating:</strong> {ratingObj.value ? ratingObj.value.toFixed(1) : 'N/A'} / 10
                             </p>
                         </div>
+                        {/* Add to Library Button */}
+                        <button
+                            onClick={addToAchat}
+                            className="mt-6 w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition"
+                        >
+                            + Ajouter à ma librairie
+                        </button>
                     </div>
                 </div>
             </section>

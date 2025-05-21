@@ -32,7 +32,8 @@ const Login = () => {
                 alert('Connexion réussie !');
                 navigate('/'); // Redirect to the home page or another page
             } else {
-                alert('Pseudo ou mot de passe incorrect.');
+                const errorData = await response.json();
+                alert(`Erreur: ${errorData.message || 'Une erreur est survenue.'}`);
             }
         } catch (error) {
             console.error('Erreur:', error);
@@ -59,7 +60,6 @@ const Login = () => {
                                 onChange={handleChange}
                                 className="w-full px-4 py-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Entrez votre pseudo"
-                                required
                             />
                         </div>
                         <div className="mb-6">
@@ -74,7 +74,6 @@ const Login = () => {
                                 onChange={handleChange}
                                 className="w-full px-4 py-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Entrez votre mot de passe"
-                                required
                             />
                         </div>
                         <button
