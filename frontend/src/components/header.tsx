@@ -144,6 +144,19 @@ export default function Header() {
                     )}
                 </div>
             </div>
+            <div className="bg-gray-800 px-6 py-2">
+                <nav className="flex space-x-6">
+                    <Link to="/" className="text-sm text-gray-400 hover:text-white">
+                        Accueil
+                    </Link>
+                    <Link to="/category" className="text-sm text-gray-400 hover:text-white">
+                        Catégorie
+                    </Link>
+                    <a href="#" className="text-sm text-gray-400 hover:text-white">
+                        Découvrir
+                    </a>
+                </nav>
+            </div>
         </header>
     );
 }

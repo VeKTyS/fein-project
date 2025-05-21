@@ -16,11 +16,10 @@ const Register = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        // Simulate checking login state (e.g., token in localStorage)
-        const userId = localStorage.getItem('userId'); // Replace with actual token logic
+        const userId = localStorage.getItem('userId');
         if (userId) {
             setIsLoggedIn(true);
-            navigate('/settings'); // Redirect to settings if already logged in
+            navigate('/settings');
         }
     }, [navigate]);
 
