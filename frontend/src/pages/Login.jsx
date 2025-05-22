@@ -28,9 +28,9 @@ const Login = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                localStorage.setItem('userId', data.user.ID_Utilisateur); // Save user ID in localStorage
+                localStorage.setItem('userId', data.user.ID_Utilisateur);
                 alert('Connexion réussie !');
-                navigate('/'); // Redirect to the home page or another page
+                navigate('/');
             } else {
                 const errorData = await response.json();
                 alert(`Erreur: ${errorData.message || 'Une erreur est survenue.'}`);

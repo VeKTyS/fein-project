@@ -4,7 +4,6 @@ import { useGamesData } from '../data/gameData';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-// Helper to decode HTML entities
 function decodeHtml(html) {
     const txt = document.createElement('textarea');
     txt.innerHTML = html;
@@ -14,7 +13,7 @@ function decodeHtml(html) {
 const GameDetails = () => {
     const { id } = useParams();
     const { data, ratings, loading } = useGamesData();
-    const userId = localStorage.getItem("userId"); // Retrieve userId from localStorage
+    const userId = localStorage.getItem("userId");
 
     if (loading) {
         return (

@@ -4,7 +4,6 @@ import { useGamesData } from '../data/gameData';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-// Remove brackets and single quotes
 const removeBrackets = (str) => {
     if (typeof str === 'string') {
         return str.replace(/[\[\]']/g, '');
@@ -27,7 +26,6 @@ const Category = () => {
         );
     }
 
-    // Étape clé : extraire les catégories individuelles
     const allCategories = data
         .flatMap(game => {
             const raw = removeBrackets(game.boardgamecategory);

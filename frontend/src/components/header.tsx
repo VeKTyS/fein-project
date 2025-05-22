@@ -5,7 +5,7 @@ export default function Header() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userName, setUserName] = useState("");
-    const [userId, setUserId] = useState(""); // Add userId state
+    const [userId, setUserId] = useState("");
     const navigate = useNavigate();
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -13,7 +13,7 @@ export default function Header() {
         const storedUserId = localStorage.getItem('userId');
         if (storedUserId) {
             setIsLoggedIn(true);
-            setUserId(storedUserId); // Set userId from localStorage
+            setUserId(storedUserId);
 
             fetch(`http://localhost:5000/api/user/${storedUserId}`)
                 .then((response) => {
@@ -34,7 +34,7 @@ export default function Header() {
     const handleLogout = () => {
         localStorage.removeItem('userId');
         setIsLoggedIn(false);
-        setUserId(""); // Clear userId
+        setUserId("");
         navigate("/login");
     };
 
@@ -54,7 +54,6 @@ export default function Header() {
     return (
         <header className="bg-gray-900 text-white shadow-md">
             <div className="flex items-center justify-between px-6 py-4">
-                {/* Left Section: Logo and Navigation */}
                 <div className="flex items-center space-x-6">
                     <Link to="/">
                         <img
@@ -80,7 +79,6 @@ export default function Header() {
                     </nav>
                 </div>
 
-                {/* Right Section: User Dropdown */}
                 <div className="relative" ref={dropdownRef}>
                     {isLoggedIn ? (
                         <div className="flex items-center space-x-2">

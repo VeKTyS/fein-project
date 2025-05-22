@@ -3,15 +3,14 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const ProfilPage = () => {
-    const [username, setUsername] = useState(""); // Dynamic username
-    const [purchasedGames, setPurchasedGames] = useState([]); // Games from the `achat` table
-    const [loading, setLoading] = useState(true); // Loading state
-    const userId = localStorage.getItem("userId"); // Retrieve userId from localStorage
+    const [username, setUsername] = useState("");
+    const [purchasedGames, setPurchasedGames] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const userId = localStorage.getItem("userId");
 
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                // Fetch user data (e.g., username)
                 const userResponse = await fetch(`http://localhost:5000/api/user/${userId}`);
                 if (!userResponse.ok) {
                     throw new Error("Failed to fetch user data");
@@ -19,19 +18,17 @@ const ProfilPage = () => {
                 const userData = await userResponse.json();
                 setUsername(userData.pseudo);
 
-                // Fetch user's purchased games from the `achat` table
                 const purchaseResponse = await fetch(`http://localhost:5000/api/achat/${userId}`);
                 if (!purchaseResponse.ok) {
                     throw new Error("Failed to fetch purchased games");
                 }
                 const purchaseData = await purchaseResponse.json();
 
-                // Map the backend response to the expected format
                 setPurchasedGames(purchaseData.games.map((game) => ({
                     id: game.ID_Jeu,
-                    name: game.primary_key, // Replace with the correct field from the backend
+                    name: game.primary_key,
                     description: `Purchased on ${new Date(game.date_achat).toLocaleDateString()}`,
-                    imageUrl: game.imageUrl || "https://via.placeholder.com/150", // Default image
+                    imageUrl: game.imageUrl || "https://via.placeholder.com/150",
                 })));
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -45,10 +42,8 @@ const ProfilPage = () => {
 
     return (
         <main className="flex flex-col min-h-screen bg-gray-900 text-white">
-            {/* Header */}
             <Header />
 
-            {/* Content */}
             <section className="flex-grow px-4 py-8 md:px-8">
                 {loading ? (
                     <p className="text-gray-400">Chargement...</p>
@@ -85,7 +80,6 @@ const ProfilPage = () => {
                 )}
             </section>
 
-            {/* Footer */}
             <Footer />
         </main>
     );

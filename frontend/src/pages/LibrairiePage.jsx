@@ -3,9 +3,9 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const LibrairiePage = () => {
-    const [games, setGames] = useState([]); // State to store games
-    const [loading, setLoading] = useState(true); // Loading state
-    const userId = localStorage.getItem("userId"); // Retrieve userId from localStorage
+    const [games, setGames] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const userId = localStorage.getItem("userId");
 
     useEffect(() => {
         const fetchGames = async () => {
@@ -18,7 +18,7 @@ const LibrairiePage = () => {
 
                 setGames(data.games.map((game) => ({
                     id: game.ID_Jeu,
-                    name: game.primary_key, // Use the actual game name from the backend
+                    name: game.primary_key,
                     description: `Acheté le ${new Date(game.date_achat).toLocaleDateString()}`,
                 })));
             } catch (error) {
@@ -40,7 +40,6 @@ const LibrairiePage = () => {
                 throw new Error("Failed to remove game");
             }
 
-            // Update state to remove the game from the list
             setGames((prevGames) => prevGames.filter((game) => game.id !== gameId));
         } catch (error) {
             console.error("Error removing game:", error);
@@ -49,10 +48,8 @@ const LibrairiePage = () => {
 
     return (
         <main className="flex flex-col min-h-screen bg-gray-900 text-white">
-            {/* Header */}
             <Header />
 
-            {/* Content */}
             <section className="flex-grow px-4 py-8 md:px-8">
                 <h2 className="text-2xl font-semibold mb-6">Votre Librairie</h2>
                 <p className="text-gray-400 mb-4">Bienvenue dans votre librairie de jeux.</p>
@@ -70,7 +67,7 @@ const LibrairiePage = () => {
                                     <h3 className="text-lg font-bold">{game.name}</h3>
                                     <p className="text-sm text-gray-400 mt-2">{game.description}</p>
                                 </div>
-                                {/* Remove button */}
+
                                 <button
                                     onClick={() => removeGame(game.id)}
                                     className="absolute top-2 right-2 w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center shadow-md hover:bg-red-700 transition"
@@ -86,7 +83,6 @@ const LibrairiePage = () => {
                 )}
             </section>
 
-            {/* Footer */}
             <Footer />
         </main>
     );

@@ -32,7 +32,7 @@ const Settings = () => {
                 })
                 .catch((error) => {
                     console.error('Erreur lors de la récupération des données utilisateur :', error);
-                    navigate('/login'); // Redirection en cas d'erreur
+                    navigate('/login');
                 });
         }
     }, [navigate]);
@@ -66,7 +66,7 @@ const Settings = () => {
     };
 
     if (isCheckingLogin) {
-        return null; // Ou un spinner de chargement si tu préfères
+        return null;
     }
 
     return (

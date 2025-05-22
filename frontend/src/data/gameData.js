@@ -6,7 +6,7 @@ export const useGamesData = () => {
     const [ratings, setRatings] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // Initialize IndexedDB
+    // Init IDB for data compression
     const initDB = async () => {
         return openDB('GameDataDB', 1, {
             upgrade(db) {
@@ -20,7 +20,7 @@ export const useGamesData = () => {
         });
     };
 
-    // Fetch and cache data in IndexedDB
+    // caching data
     const fetchAndCacheData = async () => {
         console.log('Fetching data from API...');
         try {
@@ -76,17 +76,17 @@ export const useGamesData = () => {
                 name,
             }));
 
-            // Store data in IndexedDB
+            // Store data
             const db = await initDB();
             const tx = db.transaction(['details', 'ratings'], 'readwrite');
             const detailsStore = tx.objectStore('details');
             const ratingsStore = tx.objectStore('ratings');
 
-            // Clear existing data
+            // Clear data
             await detailsStore.clear();
             await ratingsStore.clear();
 
-            // Add new data
+            // Add data
             optimizedDetails.forEach(detail => detailsStore.put(detail));
             processedRatings.forEach(rating => ratingsStore.put(rating));
 
@@ -104,7 +104,7 @@ export const useGamesData = () => {
         }
     };
 
-    // Load data from IndexedDB
+    // Load data
     const loadDataFromIndexedDB = async () => {
         try {
             const db = await initDB();

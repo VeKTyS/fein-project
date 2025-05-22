@@ -10,7 +10,6 @@ function decodeHtml(html) {
     return txt.value;
 }
 
-// Nettoie les catégories (enlève crochets et apostrophes)
 const removeBrackets = (str) => {
     if (typeof str === 'string') {
         return str.replace(/[\[\]']/g, '');
