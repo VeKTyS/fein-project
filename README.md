@@ -8,3 +8,4 @@ Pour lier la base de donnée (côté enseignant) :
 - Voir sur Moodle le dump du schema de la base de donnée (vues, triggers, et données incluses)
 - Créer un fichier ENV ou modifier dans le fichier backend/config/db.js les identifiants de connexion
   
+© EFREI Paris - 2025 VONG Lucas WANG Leo REN Jonathan. Tous droits réservés.
