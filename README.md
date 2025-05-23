@@ -68,4 +68,4 @@ Maquettes réalisées sur **Figma** :
 - 📷 Faible qualité des images fournies → impact négatif sur l'UX
 
 
-© EFREI Paris - 2025 VONG Lucas WANG Leo REN Jonathan. Tous droits réservés.
+##© EFREI Paris - 2025 VONG Lucas WANG Leo REN Jonathan. Tous droits réservés.
