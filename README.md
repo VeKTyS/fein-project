@@ -22,7 +22,7 @@ Projet réalisé dans le cadre du cours **TI603 – Bases de Données Avancées*
 
 ## 🎯 Objectif
 
-Développer une **application web** avec une **base de données relationnelle** permettant de gérer une **librairie de jeux de société**. L'utilisateur peut consulter, acheter, emprunter, et noter des jeux.
+Développer une **application web** avec une **base de données relationnelle** permettant de gérer une **librairie de jeux de société**. L'utilisateur peut consulter, ajouter des jeux à sa librairie, et noter des jeux.
 
 ## 🧩 Fonctionnalités
 
